@@ -1,0 +1,245 @@
+{% assign campaign_name = {{campaign.${name}}} %}
+{% assign parts = campaign_name | split: "_" %}
+
+{% if parts.size != 7 %}
+{% abort_message('CRM Tech | 🔴 Error: Campaign/Step Naming Convention Incorrect - Must have 7 parts') %}
+{% endif %}
+
+{% assign part_A = parts[0] %}{% assign part_B = parts[1] %}{% assign part_C = parts[2] %}{% assign part_D = parts[3] %}{% assign part_E = parts[4] %}{% assign part_F = parts[5] %}{% assign part_G = parts[6] %}
+
+{% capture message_number %}{{ part_A }}{% endcapture %}
+{% if message_number.size != 2 or message_number contains '-' or message_number contains '.' %}
+{% abort_message('CRM Technology | 🔴 Error: Message Number must be 2 digits') %}
+{% endif %}
+
+{% if part_B contains 'D' or part_B contains 'd' or 
+    part_B contains 'H' or part_B contains 'h' or 
+    part_B contains 'M' or part_B contains 'm' or 
+    part_B contains 'MT' or part_B contains 'mt' or 
+    part_B contains 'Y' or part_B contains 'y' or 
+    part_B contains 'X' or part_B contains 'x' %}
+{% else %}
+{% abort_message('CRM Tech | 🔴 Error: Invalid Message Delay format') %}
+{% endif %}
+
+{% if part_C == 'c' or part_C == 't' %}
+{% else %}
+{% abort_message('CRM Tech | 🔴 Error: Must be c or t for Control/Treatment') %}
+{% endif %}
+
+{% assign valid_channels = "e,p,s,i,c,w" | split: "," %}
+{% assign channel_parts = part_D | split: "_" %}
+{% for channel in channel_parts %}
+  {% assign chars = channel | split: '' %}
+  {% for char in chars %}
+    {% if valid_channels contains char %}
+    {% else %}
+      {% abort_message('CRM Tech | 🔴 Error: Invalid channel code') %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% if part_E == blank %}
+{% abort_message('CRM Tech | 🔴 Error: Segment/Variant required') %}
+{% endif %}
+
+{% if part_F == blank and part_F != "x" %}
+{% abort_message('CRM Tech | 🔴 Error: Offer must be x or valid offer name') %}
+{% endif %}
+
+{% if part_G == blank %}
+{% abort_message('CRM Tech | 🔴 Error: Description required') %}
+{% endif %}
+
+
+
+{% assign trimmed_service_type = service_type | strip %}
+{% if type == "marketing" and subscribed_state.${email_global} == "unsubscribed" %}
+  {% abort_message ('CRM Tech | 🔴 Error: Marketing Content User Globally Unsubscribed') %}
+{% elsif type == "service" and trimmed_service_type != "feedusback" and trimmed_service_type != "latedelivery" %}
+  {% abort_message ('CRM Tech | 🔴 Error: Service No Allowed service_type Set') %}
+{% endif %}
+
+
+
+{% if headertype != blank %}{% else %}
+{% abort_message('CRM Tech | 🔴 Error: Hero Type Not Set') %}{% endif %}
+{% if type != blank %}{% else %}
+{% abort_message('CRM Tech | 🔴 Error: Email Type Not Set') %}
+{% endif %}
+
+
+
+{% assign allowed_verticals = "crm_lifecycle,crm_campaign,crm_national,crm_local,crm_loyalty,crm_abandonsession,crm_abandonbasket,crm_postpurchase,crm_latedelivery,crm_feedusback,crm_drivertipping" | split: "," %}
+{% case vertical %}
+  {% when "crm_lifecycle" or "crm_campaign" or "crm_national" or "crm_local" or "crm_loyalty" or "crm_abandonsession" or "crm_abandonbasket" or "crm_postpurchase" or "crm_latedelivery" or "crm_feedusback" or "crm_drivertipping" %}
+    {% capture utm %}?utm_medium=email&utm_source=crm&utm_campaign={{campaign.${name}}}&utm_term={{vertical}}{% endcapture %}
+  {% when "" %}
+    {% abort_message('CRM Technology | 🔴 Error: Vertical Parameter Not Declared') %}
+  {% else %}
+    {% capture error_message %}CRM Technology | 🔴 Error: Invalid vertical value "{{vertical}}". Please Select A Permitted Value.{% endcapture %}
+    {% abort_message('error_message') | strip %}
+{% endcase %}
+
+
+
+{% if {{custom_attribute.${DWH_StoreCountryCode}}} == "ROI" %}
+  {% assign domain = "www.dominos.ie" %}
+{% else %}
+  {% assign domain = "www.dominos.co.uk" %}
+{% endif %}
+
+{% if country == "ROI" %}
+  {% assign country_suffix = "ROIWeb" %}
+{% else %}
+  {% assign country_suffix = "UKWeb" %}
+{% endif %}
+
+{% assign source = "crm" %}
+
+
+{% if type == "loyalty" %}
+  {% if service_type == "loyalty" %}
+    {% assign logo = "https://cdn.braze.eu/appboy/communication/assets/image_assets/images/65c23d73a92775005f24c37a/original.png?1707228531" %}
+  {% else %}
+    {% assign logo = "https://cdn.braze.eu/appboy/communication/assets/image_assets/images/67a0eb847149ee2cf140da97/original.png?1738599297" %}
+  {% endif %}
+{% elsif headercolor == "blue" %}
+  {% assign logo = "https://cdn.braze.eu/appboy/communication/assets/image_assets/images/65c23d73a92775005f24c37a/original.png?1707228531" %}
+{% elsif headercolor == "white" %}
+  {% assign headercolor = "#fff" %}
+  {% assign logo = "https://cdn.braze.eu/appboy/communication/assets/image_assets/images/64d3a07098682973bed311f0/original.gif?1691590768" %}
+{% endif %}
+
+
+{% if type == "loyalty" %}
+  {% assign headercolor = "#01416a" %}
+{% elsif headercolor == "blue" %}
+  {% assign headercolor = "#006491" %}
+{% endif %}
+ 
+{% if type == "loyalty" %}
+  {% assign background = "#01416a" %}
+  {% assign titlecolor = "#ffffff" %}
+  {% assign subcolour = "#43A836" %}
+  {% assign bodycolor = "#ffffff" %}
+  {% assign coltext = "#ffffff" %}
+  {% assign colbtn = "#ffffff" %}    
+  {% assign btntext = "#01416a" %}  
+{% elsif type == "marketing" and subbrand == "Italianos" %}
+  {% assign headercolor = "#fff" %}  
+  {% assign logo = "https://cdn.braze.eu/appboy/communication/assets/image_assets/images/64d3a07098682973bed311f0/original.gif?1691590768" %}
+  {% assign background = "#000000" %}
+  {% assign titlecolor = "#ffffff" %}
+  {% assign subcolour = "#ffffff" %}
+  {% assign bodycolor = "#ffffff" %}
+  {% assign coltext = "#ffffff" %}
+  {% assign colbtn = "#ffffff" %}    
+  {% assign btntext = "#000000" %}
+  {% elsif type == "marketing" and subbrand == "chickndip" %}
+    {% assign headercolor = "#000" %}  
+  {% assign logo = "https://cdn.braze.eu/appboy/communication/assets/image_assets/images/689b470022ded50807f18fc2/original.gif?1755006720" %}
+  {% assign background = "#000000" %}
+  {% assign titlecolor = "#ffffff" %}
+  {% assign subcolour = "#ffffff" %}
+  {% assign bodycolor = "#ffffff" %}
+  {% assign coltext = "#ffffff" %}
+  {% assign colbtn = "#ffffff" %}    
+  {% assign btntext = "#000000" %}
+{% else %}
+  {% assign background = "#ffffff" %}
+  {% assign titlecolor = "#01416a" %}
+  {% assign subcolour = "#43aa35" %}
+  {% assign bodycolor = "#393336" %}
+  {% assign coltext = "#393336" %}
+  {% assign colbtn = "#006491" %}    
+  {% assign btntext = "#ffffff" %}    
+{% endif %}
+
+{% if ctacolour == "green" %}
+  {% if ctatype == "fill" %}
+    {% assign buttoncolor = "#3F9335" %}
+    {% assign ctatextcolor = "#ffffff" %}
+  {% elsif ctatype == "outline" %}
+    {% assign buttoncolor = "transparent" %}
+    {% assign outline = "#3F9335" %}
+    {% assign ctatextcolor = "#3F9335" %}
+  {% endif %}
+{% elsif ctacolour == "blue" %}
+  {% if ctatype == "fill" %}
+    {% assign buttoncolor = "#006491" %}
+    {% assign ctatextcolor = "#ffffff" %}
+  {% elsif ctatype == "outline" %}
+    {% assign buttoncolor = "transparent" %}
+    {% assign outline = "#006491" %}
+    {% assign ctatextcolor = "#006491" %}
+  {% endif %}
+{% endif %}
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: auto; width:600px; background:{{background}}" class="w100pc" align="center" bgcolor="{{background}}">
+                {% if type == "service" %}
+  <!-- Force header1 for service emails -->
+  <tr>
+    <td bgcolor="{{headercolor}}" align="center" style="padding: 20px 15px; text-align: center;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tr>
+                <td align="center">
+                    <a href="dominos-app://deep.link/home{{utm}}" target="_blank">
+                        <img src="{{ logo }}" width="155" alt="Dominos logo" style="height: auto; display: inline-block;">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </td>
+  </tr>
+{% else %}
+  {% if headertype == "header2" %}
+    <tr>
+        <td bgcolor="{{headercolor}}" align="center" style="text-align: center;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="width:600px" class="w100pc">
+                <tr>
+                    <td align="left" height="{% if type == 'marketing' and subbrand == 'chickndip' %}100{% else %}62{% endif %}">
+                                
+                        <a href="https://app.adjust.com/jsr?lid={{${cblid} | lid: 'yxup9uv1ifr8'}}&url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}" target="_blank">
+                        <img src="{{ logo }}" width="{% if type == 'marketing' and subbrand == 'chickndip' %}250{% else %}155{% endif %}" alt="Dominos logo" style="height: auto; display: inline-block; width:{% if type == 'marketing' and subbrand == 'chickndip' %}250px{% else %}175px{% endif %}; border:0;" border="0">
+                        </a>
+                    </td>
+                    <td align="right" width="50%" height="{% if type == 'marketing' and subbrand == 'chickndip' %}100{% else %}62{% endif %}">
+                        
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td align="center" valign="top">
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                    <tr>
+                                    <td  align="left" valign="middle"><a href="https://app.adjust.com/jsr?lid={{${cblid} | lid: 'bciiyr4n2m7b'}}&url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}" target="_blank" style="text-decoration: none;">
+                            <img src="{% if headercolor == '#fff' %}https://cdn.braze.eu/appboy/communication/assets/image_assets/images/65c24140bb8e77006143d248/original.png?1707229504{% else %}https://cdn.braze.eu/appboy/communication/assets/image_assets/images/65c24b0a57de2e0069ae7528/original.png?1707232010{% endif %}" width="40" alt="menu" style="height: auto; padding-right: 10px; border: 0; display: inline-block !important;">
+                        </a></td>
+                        <td style="width: 2px; vertical-align: middle; font-size:0; line-height:0; background-color: {% if headercolor == '#fff' %}#01416a{% else %}#ffffff{% endif %}"></td>
+                        <td align="left" valign="middle"><a href="https://app.adjust.com/jsr?lid={{${cblid} | lid: 'oonulqxoylgq'}}&url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}" target="_blank" style="text-decoration: none; display: inline-block !important;">
+                            <img src="{% if headercolor == '#fff' %}https://cdn.braze.eu/appboy/communication/assets/image_assets/images/65c24140edb683006146c7e1/original.png?1707229504{% else %}https://cdn.braze.eu/appboy/communication/assets/image_assets/images/65c24b0a3294b90d89b8df16/original.png?1707232010{% endif %}" width="40" alt="deals" style="height: auto; padding-left: 10px; border: 0; display: inline-block !important">
+                        </a></td>
+                                    </tr></table>
+
+                            </td>
+                        </tr>
+                        </table> 
+                    </td>
+                </tr>
+            </table>
+        </td>
+     </tr>
+  {% elsif headertype == "header1" %}
+    <tr>
+    <td bgcolor="{{headercolor}}" align="center" style="padding: {% if type == 'marketing' and subbrand == 'chickndip' %}30px{% else %}20px{% endif %} 15px; text-align: center;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tr>
+                <td align="center">
+                    <a href="https://app.adjust.com/jsr?lid={{${cblid} | lid: 'su24c9uoqyro'}}&url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523menu%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}" target="_blank">
+                        <img src="{{ logo }}" width="{% if type == 'marketing' and subbrand == 'chickndip' %}250{% else %}155{% endif %}" alt="Dominos logo" style="height: auto; display: inline-block;">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </td>
+   </tr>
+  {% endif %}
+{% endif %}
