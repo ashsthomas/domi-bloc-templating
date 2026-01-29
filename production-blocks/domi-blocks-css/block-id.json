@@ -1,0 +1,10 @@
+{
+  "content_block_id": "xxxxxxxxxxxx",
+  "name": "domi_block_css",
+  "description": "The main css block",
+  "state": "active",
+  "tags": [
+    "main-css"
+  ],
+  "content_type": "html"
+}
