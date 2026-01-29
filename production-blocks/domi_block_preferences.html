@@ -1,0 +1,94 @@
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: {% if type == 'marketing' and subbrand == 'chickndip' %}#444444{% elsif type == 'loyalty' %}#1e4a76{% else %}#ffffff{% endif %};">
+<tr>
+    <td align="center" style="padding: 20px 0;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="540" align="center" style="width: 85%; max-width: 540px;" class="w90pc">
+            <tr>
+                {% if type == 'marketing' and subbrand == 'chickndip' %}
+                    {% assign ctaBgColor = "#e31837" %}
+                    {% assign ctaTextColor = "#ffffff" %}
+                    {% assign sectionBgColor = "#000000" %}
+                    {% assign btnBorderRadius = "25px" %}
+                {% elsif type == 'marketing' and subbrand == 'Italianos' %}
+                    {% assign ctaBgColor = "#ce2b37" %}
+                    {% assign ctaTextColor = "#ffffff" %}
+                    {% assign sectionBgColor = "#000000" %}
+                    {% assign btnBorderRadius = "25px" %}
+                {% elsif type == 'loyalty' %}
+                    {% assign ctaBgColor = "#e31837" %}
+                    {% assign ctaTextColor = "#fff" %}
+                    {% assign sectionBgColor = "#02274d" %}
+                    {% assign btnBorderRadius = "25px" %}
+                {% else %}
+                    {% assign ctaBgColor = "#e31837" %}
+                    {% assign ctaTextColor = "#ffffff" %}
+                    {% assign sectionBgColor = "#006491" %}
+                    {% assign btnBorderRadius = "25px" %}
+                {% endif %}
+                
+                <td style="padding: 30px 20px; background-color: {{ sectionBgColor }}; border-radius: 12px;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td align="center" style="padding-bottom: 15px;">
+                                <h2 style="margin: 0; font-family: Arial, sans-serif; font-size: 24px; line-height: 30px; color: #ffffff; font-weight: bold;">
+                                {% if type == 'marketing' and subbrand == 'chickndip' %}
+                                    Don't Want to Hear About Chicken?
+                                {% elsif content == 'football' %}
+                                    Football Not Really Your Thing?
+                                {% elsif content == 'spicy' %}
+                                    Not a Spicy fan?
+                                {% elsif content == 'tipping' %}
+                                    Don't want to leave a tip?
+                                {% elsif service_type == 'feedusback' or content == 'feedusback' %}
+                                    Feedback Surveys Not Your Vibe?
+                                {% elsif content == 'mothersday' %}
+                                    Don't want to hear about Mother's day?
+                                {% elsif content == 'fathersday' %}
+                                    Don't want to hear about Father's day?
+                                {% elsif content == 'loyalty' %}
+                                    Not interested in being part of Domino's Rewards?
+                                {% endif %}
+                                </h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" style="padding-bottom: 20px;">
+                                <p style="margin: 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 22px; color: #ffffff;">
+                                {% if type == 'marketing' and subbrand == 'chickndip' %}
+                                    Click below to opt-out of chicken messages
+                                {% elsif content == 'football' %}
+                                    Click below to opt-out
+                                {% elsif content == 'spicy' %}
+                                    If Spicy products aren't for you, click below
+                                {% elsif content == 'tipping' %}
+                                    Click below to opt-out of driver tipping reminders
+                                {% elsif content == 'mothersday' %}
+                                    Click below to opt out of Mother's day content
+                                {% elsif content == 'fathersday' %}
+                                    Click below to opt out of Father's day content
+                                {% elsif service_type == 'feedusback' or content == 'feedusback' %}    
+                                    Click below to opt out of our feedback survey
+                                {% elsif content == 'loyalty' %}
+                                    Sorry if we got this wrong. Click below to opt out.
+                                {% endif %}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            {% capture optout %}https://www.dominos.co.uk/?utm_medium=email&utm_source=crm&utm_campaign={{campaign.${name}}}&utm_term={{vertical}}&utm_content={{canvas.${name}}}{% endcapture %}
+                            <td align="center">
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                    <tr>
+                                        <td align="center" style="background-color: {{ ctaBgColor }}; border-radius: {{ btnBorderRadius }};">
+                                            <a href="{{ optout }}&lid={{${cblid} | lid: '0oaaa34ycvbh'}}" target="_blank" style="display: inline-block; padding: 12px 25px; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; color: {{ ctaTextColor }}; text-decoration: none; border-radius: {{ btnBorderRadius }};">OPT OUT</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+</table>
