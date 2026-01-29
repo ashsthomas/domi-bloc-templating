@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<title>Domino's Email</title>
+<style>
+    :root {
+        color-scheme: light;
+        supported-color-schemes: light;
+    }
+    
+    body, table, td, a { 
+        font-family: 'Lato', Arial, sans-serif !important;
+    }
+    
+    img {
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+        -ms-interpolation-mode: bicubic;
+    }
+    
+    .button-td,
+    .button-a {
+        transition: all 100ms ease-in;
+    }
+
+    .button-td-primary:hover,
+    .button-a-primary:hover {
+        background: #555555 !important;
+        border-color: #555555 !important;
+    }
+    
+@media screen and (max-width: 480px) {
+    .email-container {
+        width: 100% !important;
+        margin: auto !important;
+    }
+
+    
+    .stack-column-center,
+    .two-col-section .stack-column-center {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+        direction: ltr !important;
+    }
+    
+    
+    .stack-column img {
+        width: 100% !important;
+        max-width: 280px !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+    
+    
+    .stack-column h3 {
+        text-align: center !important;
+    }
+    
+    .stack-column p {
+        text-align: center !important;
+    }
+    
+    
+    .two-pod-layout .stack-column-center,
+    .three-pod-layout .stack-column-center {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+        direction: ltr !important;
+    }
+    
+    .pod-layout div[style*="display: inline-block"] {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+    
+    
+    .footer-links {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        padding: 5px 0 !important;
+    }
+    
+    .footer-links a {
+        display: block !important;
+        margin: 10px 0 !important;
+    }
+
+    /* Add Gmail-specific fixes */
+    [class="gmail-fix"] {
+        display: block !important;
+        min-width: 100% !important;
+    }
+    
+    /* Fix pod centering in Gmail */
+    .pod-layout div[style*="display: inline-block"],
+    .pod-layout .stack-column-center {
+        float: none !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    
+    .pod-layout img {
+        margin: 0 auto !important;
+        float: none !important;
+        display: block !important;
+    }
+    
+    .speedy-delivery-section td {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
+    .speedy-delivery-section .stack-column {
+        width: 100% !important;
+        display: block !important;
+        padding: 10px 0 !important;
+    }
+    .colsplit {
+    width: 100% !important;
+    float: left !important;
+    display: block !important;
+    }
+    
+    .column-wider {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    .column-padding {
+        padding: 15px 10px !important;
+    }
+    
+    .column-content {
+        max-width: 90% !important;
+        width: 90% !important;
+    }
+    
+    .column-image {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    /* Improved text proportions for mobile */
+    .column-title {
+        font-size: 24px !important;
+        line-height: 28px !important;
+        margin: 18px 0 15px !important;
+    }
+    
+    .column-body {
+        font-size: 16px !important;
+        line-height: 22px !important;
+        margin: 0 0 18px !important;
+    }
+    
+    .column-button a {
+        font-size: 18px !important;
+        padding: 15px 25px !important;
+    }
+}
+</style>
+
+<style>
+    @media screen and (max-width: 480px) {
+    .desktop-ribbon { display: none !important; }
+    .mobile-ribbon { 
+        display: block !important;
+        width: 320px !important;
+        height: 40px !important;
+        margin: 0 auto !important;
+        object-fit: none !important;
+    }
+    .ribbon-container {
+        display: block !important;
+        width: 100% !important;
+        height: 40px !important;
+        background-color: #01416a !important;
+        text-align: center !important;
+        font-size: 0 !important;
+        overflow: hidden !important;
+    }
+    }
+</style>
+
+<style>
+   
+    .speedy-delivery-section {
+        width: 100% !important;
+        max-width: 600px !important;
+        margin: 0 auto !important;
+    }
+    
+    .speedy-delivery-section td {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    @media screen and (max-width: 600px) {
+        
+        .speedy-delivery-section .stack-column {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 10px !important;
+            box-sizing: border-box !important;
+        }
+        
+        .speedy-delivery-section img {
+            width: auto !important;
+            max-width: 260px !important;
+            height: auto !important;
+            margin: 0 auto !important;
+        }
+    }
+</style>
+
+<style>
+@media screen and (max-width: 480px) {
+    {% if type == 'marketing' and subbrand == 'chickndip' %}
+    .chickndip-strip-container {
+        max-width: 100% !important;
+        padding: 0 10px !important;
+    }
+    .chickndip-strip-inner {
+        max-width: 100% !important;
+    }
+    
+    {% endif %}
+}
+</style>
+
+<style>
+    .speedy-delivery-image {
+        width: 100% !important;
+        max-width: none !important;
+        height: auto !important;
+        display: block !important;
+    }
+    
+    @media screen and (max-width: 600px) {
+        .speedy-delivery-column {
+            display: block !important;
+            width: 100% !important;
+            max-width: none !important;
+        }
+        
+        .speedy-delivery-image-cell {
+            padding: 0 !important;
+            font-size: 0 !important;
+            width: 100% !important;
+        }
+    }
+</style>
+
+<style>
+    .header2-section img,
+    .header2-section a {
+        display: inline-block !important;
+        vertical-align: middle !important;
+    }
+    
+    @media screen and (max-width: 600px) {
+        
+        .speedy-delivery div[style*="display: inline-block"] {
+            display: block !important;
+            width: 100% !important;
+            min-width: 100% !important;
+        }
+        
+        .header2-section div[style*="display: inline-block"] {
+            display: inline-block !important;
+            width: auto !important;
+            min-width: auto !important;
+        }
+    }
+</style>
+
+<style>
+    .header2-section {
+        background-color: inherit !important;
+    }
+    
+    .header2-section td {
+        background-color: inherit !important;
+    }
+    
+    .header2-section a,
+    .header2-section img {
+        display: inline-block !important;
+        vertical-align: middle !important;
+        background-color: transparent !important;
+    }
+</style>
+
+<style>
+    @media screen and (max-width: 600px) {
+        .speedy-delivery div[style*="display: inline-block"] {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            font-size: initial !important;
+        }
+        
+        .speedy-delivery td[style*="font-size: 0"] {
+            font-size: initial !important;
+        }
+        
+        .speedy-delivery div {
+            max-width: none !important;
+        }
+        
+        .speedy-delivery img {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        
+        .speedy-delivery td[style*="padding: 30px"] {
+            padding: 25px 15px !important;
+        }
+        
+        .speedy-delivery h2 {
+            font-size: 18px !important;
+            line-height: 24px !important;
+            margin: 10px 0 !important;
+        }
+    }
+</style>
+
+<style>
+@media screen and (max-width:480px) {
+.w100pc {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 1000px !important;
+    height: auto !important;
+}
+.colsplit {
+    width: 100% !important;
+    float: left !important;
+    display: block !important;
+    }
+.g-img{
+    width:100% !important;
+    display: block !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+    }
+table th {
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: top;
+    font-weight: normal;
+}
+table td {
+    border-collapse: collapse;
+}
+</style>
+</head>
+
+
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #EFEFEF;">
+
+    <center role="article" aria-roledescription="email" lang="en" style="width: 100%; background-color: #EFEFEF;">
+        <div style="max-width: 600px; margin: 0 auto;" class="email-container w100pc">
