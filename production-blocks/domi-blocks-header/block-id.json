@@ -1,1 +1,10 @@
-
+{
+  "content_block_id": "xxxxxxxxxxxx",
+  "name": "domi_block_header",
+  "description": "The main header section of the domi-blocks template. Important bliock containing all of the core logic for domi-blocks",
+  "state": "active",
+  "tags": [
+    "header"
+  ],
+  "content_type": "html"
+}
