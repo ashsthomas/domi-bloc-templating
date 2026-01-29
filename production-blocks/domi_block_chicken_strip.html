@@ -1,0 +1,107 @@
+{% if {{custom_attribute.${DWH_StoreCountryCode}}} == "ROI" %}
+  {% assign domain = "www.dominos.ie" %}
+{% else %}
+  {% assign domain = "www.dominos.co.uk" %}
+{% endif %}
+
+{% if country == "ROI" %}
+  {% assign country_suffix = "ROIWeb" %}
+{% else %}
+  {% assign country_suffix = "UKWeb" %}
+{% endif %}
+
+{% assign source = "crm" %}
+
+{% assign keywords = "menu,deals,whats new,basket,desserts,drinks,pizza menu,create your own,wraps,home,feedusback,indiansurvey,chickndip" | split: "," %}
+
+{% for keyword in keywords %} 
+  {% if herolink contains keyword %}
+    {% assign link_matrix = keyword %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if hdr-rib-link != blank %}
+  {% assign domi_block = domi_block_hero %}
+{% endif %}
+
+{% case link_matrix %}
+  {% when "menu" %}
+    {% capture hdr-rib-link %}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+  
+  {% when "home" %}
+    {% capture hdr-rib-link %}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2F%2Fhome%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fhome%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523home%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fhome%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523home%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fhome%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523home%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fhome%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523home%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fhome%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523home%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+  
+  {% when "desserts menu" or "desserts" %}
+    {% capture hdr-rib-link %}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%2Fdesserts%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%252Fdesserts%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523desserts%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%252Fdesserts%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523desserts%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%252Fdesserts%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523desserts%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%252Fdesserts%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523desserts%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%252Fdesserts%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523desserts%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+  
+  {% when "wraps menu" or "wraps" %}
+    {% capture hdr-rib-link %}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%2Fwraps%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%252Fwraps%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523wraps%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%252Fwraps%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2526utm_term%253D{{vertical}}%2523wraps%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+
+  {% when "create your own" %}
+    {% capture hdr-rib-link %}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%2Fpizzas%3FproductId%3D999%26utm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%252Fpizza%252F999%252F0%252Fcreateyourownpizza%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%252Fpizza%252F999%252F0%252Fcreateyourownpizza%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+  
+  {% when "sides" %}
+    {% capture hdr-rib-link %}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2Fdeep.link%2Fmenu%2Fsides%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523sides%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523sides%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+  
+  {% when "pizza menu" %}
+    {% capture hdr-rib-link %}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%2Fpizzas%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523{{campaign.${name}}}%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523{{campaign.${name}}}%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523{{campaign.${name}}}%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523{{campaign.${name}}}%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523{{campaign.${name}}}%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+  
+  {% when "drinks" %}
+    {% capture hdr-rib-link %}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%2Fdrinks%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2523drinks%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2523drinks%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+  
+  {% when "basket" %}
+    {% capture hdr-rib-link %}https://yhe9.adj.st/basket?utm_medium=email&utm_source={{source}}&utm_campaign={{campaign.${name}}}&utm_content={{canvas.${name}}}&adj_t=ogopcx&adj_redirect=https%3A%2F%2F{{domain}}%2FStore%23Basket%3Futm_medium%3Demail%26utm_source%3Dcrm%26utm_campaign%3D{{campaign.${name}}}%26utm_term%3D{{vertical}}%26utm_content%3D{{canvas.${name}}}&adj_campaign={{campaign.${name}}}{{country_suffix}}{% endcapture %}
+  
+  {% when "whats new" %}
+    {% capture hdr-rib-link %}https://yhe9.adj.st/menu/whatsnew?utm_medium=email&utm_source={{source}}&utm_campaign={{campaign.${name}}}&utm_content={{canvas.${name}}}&adj_t=1m8d0dut&adj_campaign={{campaign.${name}}}&adj_fallback=http%3A%2F%2F{{domain}}%2Fmenu%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}&adj_redirect=http%3A%2F%2F{{domain}}%2Fmenu%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}{{country_suffix}}{% endcapture %}
+
+{% when "voucher" %}
+    {% capture hdr-rib-link %}https://www.dominos.co.uk/d?vc={{voucher}}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%3D{{canvas.${name}}}%2523menu%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+
+  {% when "chickndip" %}
+    {% capture hdr-rib-link %}https://dominos-preprod.go.link/menu/chickndip?utm_medium=email&utm_source={{source}}&utm_campaign={{campaign.${name}}}&utm_content={{canvas.${name}}}&utm_term={{vertical}}&adj_t=1ruqlhyv&adj_campaign={{campaign.${name}}}{{country_suffix}}&adj_fallback=https%3A%2F%2F{{domain}}%2Fmenu%2Fchickndip%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}{{country_suffix}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}&adj_redirect=https%3A%2F%2F{{domain}}%2Fmenu%2Fchickndip%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}{{country_suffix}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}&adj_redirect_macos=https%3A%2F%2F{{domain}}%2Fmenu%2Fchickndip%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}{{country_suffix}}%26utm_content%3D{{canvas.${name}}}%26utm_term%3D{{vertical}}{% endcapture %}
+
+  {% when "feedusback" %}
+    {% capture hdr-rib-link %}{{custom_attribute.${DWH_FUBCTA_GUID}}}{% endcapture %}
+
+  {% when "indiansurvey" %}
+    {% capture hdr-rib-link %}https://watermelon.decipherinc.com/survey/selfserve/53b/230911?lid=cvg40eof7pab&list=9&UID={{${user_id}}}{% endcapture %} 
+
+  {% else %}
+    {% capture hdr-rib-link %}https://app.adjust.com/jsr?url=https%3A%2F%2Fyhe9.adj.st%2F%2Fmenu%3Futm_medium%3Demail%26utm_source%3D{{source}}%26utm_campaign%3D{{campaign.${name}}}%26utm_content%3D{{canvas.${name}}}%26adj_t%3Dogopcx%26adj_fallback%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect_macos%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect_ios%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_redirect_android%3Dhttps%253A%252F%252F{{domain}}%252Fmenu%253Futm_medium%253Demail%2526utm_source%253D{{source}}%2526utm_campaign%253D{{campaign.${name}}}%2526utm_content%253D{{canvas.${name}}}%2523menu%26adj_campaign%3D{{campaign.${name}}}{{country_suffix}}{% endcapture %}
+{% endcase %}
+
+
+
+
+<!-- Domi Block Chicken Strip -->                           
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center" style="width:100%; max-width:600px; margin:0; border-spacing:0; {% if type == 'marketing' and subbrand == 'chickndip' %}box-sizing: border-box;{% endif %}" bgcolor="{% if type == 'marketing' and subbrand == 'chickndip' %}#262626{% else %}{{background}}{% endif %}">
+    <tr>
+        <td style="{% if type == 'marketing' and subbrand == 'chickndip' %}padding:0 20px; box-sizing: border-box;{% else %}padding:0;{% endif %} font-size:0; text-align:center;" bgcolor="{% if type == 'marketing' and subbrand == 'chickndip' %}#262626{% else %}{{background}}{% endif %}" class="chicken-strip-cell">
+            <!-- Text Version -->
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="560" style="width:100%; {% if type == 'marketing' and subbrand == 'chickndip' %}max-width:560px;{% else %}max-width:560px;{% endif %} margin:0 auto; {% if type == 'marketing' and subbrand == 'chickndip' %}background-color:#000000; border-radius:15px; box-sizing: border-box;{% endif %}" class="chicken-strip-inner">
+                <tr>
+                    <td align="center" style="padding:{% if type == 'marketing' and subbrand == 'chickndip' %}15px 10px 5px{% else %}0 10px 10px{% endif %};">
+                        <h2 style="margin:0; font-family:'lato',Arial,sans-serif; font-size:30px; line-height:30px; color:{% if type == 'marketing' and subbrand == 'chickndip' %}#ffffff{% else %}#006491{% endif %}; font-weight:bold;">{{ sectiontext }}</h2>
+                    </td>
+                </tr>
+
+                <!-- Image Version -->
+                {% if show-rib == "y" %}
+                <tr>
+                    <td align="center" style="padding:{% if type == 'marketing' and subbrand == 'chickndip' %}0 10px 10px{% else %}0{% endif %}; font-size:0; line-height:0;">
+                        <a href="{{ hdr-rib-link }}" target="_blank" style="text-decoration:none; display:block;">
+                            <img src="{{ hdr-rib-img }}" 
+                                 width="{% if type == 'marketing' and subbrand == 'chickndip' %}540{% else %}540{% endif %}" 
+                                 alt=""
+                                 style="width:100%; max-width:{% if type == 'marketing' and subbrand == 'chickndip' %}540px{% else %}540px{% endif %}; min-height:48px; height:auto; display:block; border:0; margin:0 auto;" 
+                                 />
+                        </a>
+                    </td>
+                </tr>
+                {% endif %}
+            </table>
+        </td>
+    </tr>
+</table>
