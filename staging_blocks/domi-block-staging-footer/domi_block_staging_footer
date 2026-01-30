@@ -1,1 +1,127 @@
+{% if hidespeedy == false or hidespeedy == nil %}
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+    {% if type == 'loyalty' %}{% assign speedybackground = "#01416a" %}{% elsif type == 'marketing' and subbrand == 'Italianos' %}{% assign speedybackground = "#000" %}{% elsif type == 'marketing' and subbrand == 'chickndip' %}{% assign speedybackground = "#000" %}{% else %}{% assign speedybackground = "#fff" %}{% endif %}
+    <td align="center" style="padding: 0;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center" style="width: 100%; max-width: 600px;" class="w100pc">
+            <tr>
+                <td style="padding: 0; background-color: {{ speedybackground }};">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: {{ speedybackground }};">
+                        <tr>                    
+                                <th class="colsplit" style="vertical-align: top; width: 300px;">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:auto">
+                                        <tr>
+                                            <td align="center" style="padding: 0;">
+                                                <img src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/6821bdcddc8bdd0075391e52/original.png?1747041741" 
+                                                     width="100%" 
+                                                     alt="person" 
+                                                     style="width: 100%; display: block; border: 0;" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </th>
+                                    {% if type == 'loyalty' %}{% assign speedytext = "#fff" %}{% elsif type == 'marketing' and subbrand == 'Italianos' %}{% assign speedytext = "#fff" %}{% elsif type == 'marketing' and subbrand == 'chickndip' %}{% assign speedytext = "#fff" %}{% else %}{% assign speedytext = "#01416a" %}{% endif %}
+                                <th class="colsplit" style="vertical-align: middle; width: 300px; ">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:auto">
+                                        <tr>
+                                            <td align="center" style="padding: 30px 20px;">
+                                                <h2 style="margin: 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; color: {{ speedytext }};">{% assign time_taken = custom_attribute.${DWH_LastDelivery_GPS}.LastDelivery_TimeTaken | plus: 0 %}{% assign store_name = custom_attribute.${DWH_LastDelivery_GPS}.LastDelivery_StoreName | upcase %}{% if time_taken == 0 or time_taken >= 45 %}YOUR LOCAL STORE IS WAITING FOR YOUR ORDER.{% elsif time_taken < 30 %}YOUR LAST DELIVERY FROM {{ store_name }} TOOK {{ time_taken }} MINS.{% elsif time_taken >= 30 and time_taken < 45 %}{{ store_name }} DELIVERS IN 25 MINS ON AVERAGE{% endif %}
+                                                </h2>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </th>              
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+</table>
+{% endif %}
+    {% if type == 'loyalty' %}{% assign footerbackground = "#212121" %}{% elsif type == 'marketing' and subbrand == 'Italianos' %}{% assign footerbackground = "#000" %}{% elsif type == 'marketing' and subbrand == 'chickndip' %}{% assign footerbackground = "#000" %}{% else %}{% assign footerbackground = "#006491" %}{% endif %}
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+      <td align="center">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; background-color: {{ footerbackground }};" class="w100pc">
+          <tr>
+            <td align="center" style="padding: 10px 15px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tr>
+                      <td align="center" width="100%" class="stack-column-center">
+                          <a href="{{link}}" target="_blank" style="vertical-align: middle;">
+                              <img src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/6643452f5777fb006cd9bdd4/original.png?1715684655" width="250" alt="Got our app?" border="0" class="got-our-app-image" style="height: auto; vertical-align: middle;">
+                          </a>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align="center" width="100%" class="stack-column-center" style="padding-top: 15px;">
+                          <a href="https://apps.apple.com/gb/app/dominos-pizza-delivery/id426415753?lid={{${cblid} | lid: 'q4r5hoxn381n'}}" target="_blank" style="text-decoration: none; padding: 0 5px;">
+                              <img src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/6634ee6ad1a3b4007ac2167e/original.png?1714744938" width="130" alt="Apple App store icon" border="0" style="height: auto; vertical-align: middle;">
+                          </a>
+                          <a href="https://play.google.com/store/apps/details?id=uk.co.dominos.android&hl=en_GB&pli=1&lid={{${cblid} | lid: 't1kjhm1gesb9'}}" target="_blank" style="text-decoration: none; padding: 0 5px;">
+                              <img src="https://cdn.braze.eu/appboy/communication/assets/image_assets/images/6634ee6a94fdf400788bc5a6/original.png?1714744938" width="130" alt="Google play store icon" border="0" style="height: auto; vertical-align: middle;">
+                          </a>
+                      </td>
+                  </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
 
+    <!-- Social Icons and Terms -->
+    <tr>
+      <td align="center">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; background-color: {{ footerbackground }};" class="w100pc">
+          <tr>
+            <td align="center" style="padding: 20px;">
+              <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+              </div>
+      
+              <div style="color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: 13px; line-height: 1.5; text-align: center;">
+                  {% if type == "service" %}
+                      <p>This is a service message sent by Domino's Pizza UK & Ireland Limited.</p>
+                      <p>{{ terms }}</p>
+                  {% elsif type == "loyalty" %}
+                      <p>{{ terms }}</p>
+                      {% if {{custom_attribute.${DWH_StoreCountryCode}}} == "ROI" %}
+                      <p>Domino's Rewards is available via the Dominos App only. €9.99 qualifying spend per loyalty stamp. Collect 5 loyalty stamps to earn a free any-size pizza. Maximum of one loyalty stamp per customer, per 24 hours. Collection or delivery. Delivery areas, minimum delivery spends, and delivery charges may apply. Invite only. Gluten free pizzas available as a request. Rewards expire after 3 months. ROI only. 18+. Full T&Cs see Competitions and Offers. Unsubscribe from Domino's Rewards emails here. We will send you an email to confirm you've been opted out.</p>                      
+                      {% else %}
+                      <p>Domino's Rewards is a limited-trial available via the Dominos App only. £9.99 qualifying spend per loyalty stamp. Collect 5 loyalty stamps to earn a free large pizza. Maximum of one loyalty stamp per customer, per 24 hours. Collection or delivery. Delivery areas, minimum delivery spends, and delivery charges may apply. Invite only. Gluten free pizzas available as a request. Rewards expire after 3 months. UK only. 18+. Full T&Cs see Competitions and Offers.</p>
+                      {% endif %}
+                  {% else %}
+                      <p>{{ terms }}</p>
+                  {% endif %}
+                  {% if {{custom_attribute.${DWH_StoreCountryCode}}} == "ROI" %}{% assign domain = "www.dominos.ie" %}{% else %}{% assign domain = "www.dominos.co.uk" %}{% endif %}
+                  <p style="font-size: 12px;">To see our general terms and conditions or view our privacy policy see our page 'boring legal stuff' at  <a href="https://{{domain}}{{utm}}" style="color: #ffffff; text-decoration: underline; margin: 0 10px; font-size: 13px; display: inline-block;">{{domain}}</a>.</p>
+                  <p style="font-size: 12px;">Domino's Pizza UK & Ireland Limited is registered in England under company number 02882515 and has its registered office at 1 Thornbury, West Ashland, Milton Keynes, MK6 4BB.</p>
+                  
+                  <!-- Footer Links Row -->
+                  <p class="footer-links" style="margin: 20px 0; font-size: 0;"> <!-- Fix for Outlook spacing -->
+                      <a href="https://www.dominos.co.uk/legal/content/privacypolicy{{utm}}" style="color: #ffffff; text-decoration: underline; font-size: 13px; display: inline-block !important;">Privacy Policy</a>
+                      <span style="color: #ffffff; font-size: 13px; display: inline-block !important;">&nbsp;|&nbsp;</span>
+                      <a href="https://www.dominos.co.uk/legal/content/competitionsoffers{{utm}}" style="color: #ffffff; text-decoration: underline; font-size: 13px; display: inline-block !important;">Terms & Conditions</a>
+                      {% if type == "service" or (type == "loyalty" and service_type == "loyalty" %}
+                      {% else %}
+                      <span style="color: #ffffff; font-size: 13px; display: inline-block !important;">&nbsp;|&nbsp;</span>
+                      <a href="https://{{domain}}/mp{{utm}}" style="color: #ffffff; text-decoration: underline; font-size: 13px; display: inline-block !important;">Unsubscribe</a>
+                      {% endif %}
+                  </p>
+                  <p style="margin-top: 10px; font-size: 12px;">You're receiving this email because of your selected marketing preferences in relation to this email <a href="mailto:{{${email_address}}}" style="color: #ffffff !important; text-decoration:none;">{{${email_address}}}</a></p>
+                  <p style="text-align: center; font-size: 10px; line-height: 1.5; margin-top: 10px;">Member ID: {{${braze_id}}}<br> {{most_recently_used_device.${model}}} {{most_recently_used_device.${browser}}} {{most_recently_used_device.${os}}}</p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+ </table>
+   </div>
+  </center>
+ </body>
+ </html>
